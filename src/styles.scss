@@ -1,0 +1,339 @@
+/* Colors */
+:root {
+	color-scheme: light dark;
+
+	--c-rgb-black: 0, 0, 0;
+	--c-rgb-white: 255, 255, 255;
+
+	--c-rgb-fg: 20, 20, 20;
+	--c-rgb-fg-dim: 100, 100, 100;
+	--c-rgb-bg: 255, 255, 255;
+	--c-rgb-bg-dim: 240, 240, 240;
+
+	--c-rgb-primary: 39, 123, 233;
+	--c-rgb-primary-light: 93, 156, 236;
+	--c-rgb-primary-dark: 40, 103, 184;
+	--c-rgb-primary-text: var(--c-rgb-white);
+	--c-rgb-secondary: 140, 148, 156;
+	--c-rgb-secondary-light: 173, 180, 187;
+	--c-rgb-secondary-dark: 99, 109, 120;
+	--c-rgb-secondary-text: var(--c-rgb-white);
+	--c-rgb-success: 140, 193, 82;
+	--c-rgb-success-light: 160, 212, 104;
+	--c-rgb-success-dark: 107, 164, 46;
+	--c-rgb-success-text: var(--c-rgb-white);
+	--c-rgb-danger: 218, 68, 83;
+	--c-rgb-danger-light: 237, 85, 101;
+	--c-rgb-danger-dark: 179, 30, 45;
+	--c-rgb-danger-text: var(--c-rgb-white);
+	--c-rgb-warning: 255, 206, 84;
+	--c-rgb-warning-light: 247, 219, 150;
+	--c-rgb-warning-dark: 246, 187, 66;
+	--c-rgb-warning-text: var(--c-rgb-black);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--c-rgb-fg: 220, 220, 220;
+		--c-rgb-fg-dim: 150, 150, 150;
+		--c-rgb-bg: 20, 20, 20;
+		--c-rgb-bg-dim: 40, 40, 40;
+	}
+}
+
+/* Default body */
+body {
+	font-family: Pretendard, 'Pretendard JP', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	line-height: 1.2;
+	font-weight: normal;
+	font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+	color: rgb(var(--c-rgb-fg));
+	background-color: rgb(var(--c-rgb-bg));
+
+	margin: 0;
+}
+
+/* Font size */
+
+.rem-075 {
+	font-size: 0.75rem;
+}
+.rem-1 {
+	font-size: 1rem;
+}
+.rem-125 {
+	font-size: 1.25rem;
+}
+.rem-15 {
+	font-size: 1.5rem;
+}
+.rem-175 {
+	font-size: 1.75rem;
+}
+.rem-2 {
+	font-size: 2rem;
+}
+
+.em-075 {
+	font-size: 0.75em;
+}
+.em-1 {
+	font-size: 1em;
+}
+.em-125 {
+	font-size: 1.25em;
+}
+.em-15 {
+	font-size: 1.5em;
+}
+.em-175 {
+	font-size: 1.75em;
+}
+.em-2 {
+	font-size: 2em;
+}
+
+/* Fill parent */
+
+.abs-parent {
+	position: absolute;
+	inset: 0;
+}
+
+.rel-parent {
+	position: relative;
+	inset: 0;
+}
+
+.sticky-top {
+	position: sticky;
+	top: 0;
+}
+
+/* Size */
+
+.w-50 {
+	width: 50%;
+}
+.w-100 {
+	width: 100%;
+}
+.w-auto {
+	width: auto;
+}
+.w-fit {
+	width: fit-content;
+}
+
+.h-50 {
+	height: 50%;
+}
+.h-100 {
+	height: 100%;
+}
+.h-auto {
+	height: auto;
+}
+
+/* Margin */
+$spacer: 0.25rem;
+
+.m-auto {
+	margin: auto;
+}
+
+.mx-auto {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@for $i from 0 through 5 {
+	.m-#{$i} {
+		margin: $i * $spacer;
+	}
+	.mt-#{$i} {
+		margin-top: $i * $spacer;
+	}
+	.mr-#{$i} {
+		margin-right: $i * $spacer;
+	}
+	.mb-#{$i} {
+		margin-bottom: $i * $spacer;
+	}
+	.ml-#{$i} {
+		margin-left: $i * $spacer;
+	}
+	.mx-#{$i} {
+		margin-left: $i * $spacer;
+		margin-right: $i * $spacer;
+	}
+	.my-#{$i} {
+		margin-top: $i * $spacer;
+		margin-bottom: $i * $spacer;
+	}
+
+	.p-#{$i} {
+		padding: $i * $spacer;
+	}
+	.pt-#{$i} {
+		padding-top: $i * $spacer;
+	}
+	.pr-#{$i} {
+		padding-right: $i * $spacer;
+	}
+	.pb-#{$i} {
+		padding-bottom: $i * $spacer;
+	}
+	.pl-#{$i} {
+		padding-left: $i * $spacer;
+	}
+	.px-#{$i} {
+		padding-left: $i * $spacer;
+		padding-right: $i * $spacer;
+	}
+	.py-#{$i} {
+		padding-top: $i * $spacer;
+		padding-bottom: $i * $spacer;
+	}
+}
+
+/* Display */
+@each $display in (none, block, inline, inline-block, flex, inline-flex) {
+	.d-#{$display} {
+		display: $display;
+	}
+}
+
+/* Position */
+
+.abs-lt {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+/* Flex */
+@each $dir in (row, column) {
+	.flex-#{$dir} {
+		flex-direction: $dir;
+	}
+}
+
+@each $justify in (start, end, center, between, around) {
+	.justify-#{$justify} {
+		justify-content: $justify;
+	}
+}
+
+@each $align in (start, end, center, baseline, stretch) {
+	.align-#{$align} {
+		align-items: $align;
+	}
+}
+
+.flex-fill {
+	flex: 1 1 auto;
+}
+.flex-0 {
+	flex: 0 0 auto;
+}
+.flex-1 {
+	flex: 1 1 0;
+}
+.flex-grow-0 {
+	flex-grow: 0;
+}
+.flex-grow-1 {
+	flex-grow: 1;
+}
+.flex-shrink-0 {
+	flex-shrink: 0;
+}
+.flex-shrink-1 {
+	flex-shrink: 1;
+}
+
+.ms-auto {
+	margin-left: auto;
+}
+
+/* Text align */
+
+@each $align in (left, center, right, justify) {
+	.text-#{$align} {
+		text-align: $align;
+	}
+}
+
+/* Opacity */
+.opacity-0 {
+	opacity: 0 !important;
+}
+.opacity-50 {
+	opacity: 0.5 !important;
+}
+.opacity-100 {
+	opacity: 1 !important;
+}
+
+/* Shadow */
+.shadow-0 {
+	box-shadow: none;
+}
+.shadow-1 {
+	box-shadow: 0 0.125rem 0.25rem 0 rgba(0, 0, 0, 0.15);
+}
+.shadow-2 {
+	box-shadow: 0 0.25rem 0.5rem 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Visibility */
+.hidden {
+	visibility: hidden !important;
+}
+.visible {
+	visibility: visible !important;
+}
+
+.word-break-all {
+	word-break: break-all;
+}
+
+.pre-wrap {
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	word-break: break-all;
+}
+
+/* User select */
+@each $select in (none, all, auto) {
+	.user-select-#{$select} {
+		user-select: $select;
+	}
+}
+
+/* Pointer */
+@each $pointer in (default, pointer, grab, grabbing, not-allowed, move) {
+	.cursor-#{$pointer} {
+		cursor: $pointer;
+	}
+}
+
+/* Events */
+
+.no-user-select {
+	-webkit-user-select: none;
+	-webkit-user-drag: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.no-pointer-events {
+	pointer-events: none;
+}
