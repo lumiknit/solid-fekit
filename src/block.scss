@@ -1,0 +1,239 @@
+$ui-border-radius: 0.25rem;
+
+/* Button */
+
+.btn {
+  font-size: 1rem;
+  border: 1px solid black;
+  border-radius: $ui-border-radius;
+  padding: 0.5rem;
+  transition:
+    color 0.1s ease-in-out,
+    background-color 0.1s ease-in-out,
+    border-color 0.1s ease-in-out;
+  cursor: pointer;
+}
+
+.btn-sm {
+  font-size: 0.75rem;
+  padding: 0.25rem;
+  border-radius: 9999rem;
+}
+
+/* Dropdown */
+.dropdown {
+  display: inline-block;
+}
+
+.dropdown-menu {
+  position: absolute;
+  min-width: 10rem;
+  z-index: 10;
+  padding: 0.25rem;
+  background-color: rgba(var(--c-rgb-bg), 1);
+  border-radius: $ui-border-radius;
+}
+
+.dropdown-menu > a {
+  color: rgba(var(--c-rgb-fg), 1);
+  padding: 0.3rem 0.5rem;
+  text-decoration: none;
+  display: block;
+  border-radius: $ui-border-radius;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+}
+
+.dropdown-menu > a:hover {
+  background-color: rgba(var(--c-rgb-primary), 0.25);
+}
+
+.dropdown-menu > a:active {
+  background-color: rgba(var(--c-rgb-fg), 0.25);
+}
+
+.dropdown-menu > hr {
+  border-color: rgba(var(--c-rgb-fg), 0.125);
+  margin: 1px 0;
+}
+
+/* Input */
+
+.form-control {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: $ui-border-radius;
+  font-size: 1rem;
+  padding: 0.5rem;
+  color: rgb(var(--c-rgb-fg));
+  background-color: rgb(var(--c-rgb-bg-hard));
+}
+
+.code-area > textarea.form-control {
+  height: 1rem;
+}
+
+.code-area > textarea.form-control,
+.form-control[type='text'],
+.form-control[type='password'],
+.form-control[type='number'] {
+  border: 1px solid rgba(var(--c-rgb-secondary), 0.5);
+  border-radius: $ui-border-radius;
+  padding: 0.5rem;
+}
+
+.code-area > textarea.form-control:focus,
+.form-control[type='text']:focus,
+.form-control[type='password']:focus,
+.form-control[type='number']:focus {
+  outline: 0.125rem solid rgba(var(--c-rgb-primary), 0.5);
+}
+
+.code-area > textarea.form-control:read-only,
+input.form-control[type='text']:read-only {
+  color: rgba(var(--c-rgb-fg), 1);
+  background-color: rgba(var(--c-rgb-bg), 1);
+}
+
+.code-area {
+  display: flex;
+}
+
+.code-area > textarea {
+  font-family: monospace;
+  resize: both;
+  flex: 1;
+  tab-size: 2;
+}
+
+.code-area > textarea.code-area-hidden {
+  visibility: hidden;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: $ui-border-radius;
+}
+
+.input-group > .form-control {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.input-group > .form-control:not(:last-child),
+.input-group > .btn:not(:last-child),
+.input-group > .dropdown:not(:last-child) > .btn {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.input-group > .form-control:not(:first-child),
+.input-group > .btn:not(:first-child),
+.input-group > .dropdown:not(:first-child) > .btn {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* Spinner */
+span.spinner {
+  border-width: 0.2em;
+  border-style: solid;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: b-rotation 0.5s linear infinite;
+}
+
+@keyframes b-rotation {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+/* Checkbox */
+
+.checkbox input {
+  display: none;
+}
+
+.checkbox-box {
+  content: '';
+  display: inline-block;
+  color: rgba(var(--c-rgb-primary), 1);
+  border: 0.125em solid rgba(var(--c-rgb-secondary), 0.5);
+  border-radius: 0.25em;
+  vertical-align: text-bottom;
+  text-align: center;
+  padding: 0;
+
+  &:hover {
+    outline: 0.175rem solid rgba(var(--c-rgb-primary), 0.25);
+  }
+
+  & > svg {
+    fill: transparent;
+  }
+}
+
+// --- Colors
+
+$color-names: (fg, bg, primary, secondary, success, danger, warning, info);
+
+// bg colors
+
+@each $color in $color-names {
+  .bg-#{$color} {
+    background-color: rgb(var(---rgb-#{$color}));
+  }
+
+  .fg-#{$color} {
+    color: rgb(var(--c-rgb-#{$color}));
+  }
+
+  .border-#{$color} {
+    border-color: rgb(var(--c-rgb-#{$color}));
+  }
+
+  .stroke-#{$color} {
+    stroke: rgb(var(--c-rgb-#{$color}));
+  }
+
+  /* Buttons */
+
+  .btn-#{$color} {
+    color: rgba(var(--c-rgb-#{$color}-text), 1);
+    background-color: rgba(var(--c-rgb-#{$color}), 1);
+    border-color: rgba(var(--c-rgb-#{$color}), 1);
+  }
+
+  .btn-ol-#{$color} {
+    color: rgba(var(--c-rgb-#{$color}), 1);
+    background-color: transparent;
+    border-color: rgba(var(--c-rgb-#{$color}), 1);
+  }
+
+  .btn.btn-#{$color}:not(:disabled):hover,
+  .btn.btn-ol-#{$color}:not(:disabled):hover {
+    color: rgba(var(--c-rgb-#{$color}-text), 1);
+    background-color: rgba(var(--c-rgb-#{$color}-light), 1);
+    border-color: rgba(var(--c-rgb-#{$color}-light), 1);
+  }
+
+  .btn.btn-#{$color}:not(:disabled):active,
+  .btn.btn-ol-#{$color}:not(:disabled):active {
+    color: rgba(var(--c-rgb-#{$color}-text), 1);
+    background-color: rgba(var(--c-rgb-#{$color}-dark), 1);
+    border-color: rgba(var(--c-rgb-#{$color}-dark), 1);
+  }
+}

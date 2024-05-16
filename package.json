@@ -38,7 +38,7 @@
     "require": "./dist/cjs/index.js"
   },
   "scripts": {
-    "build": "rollup -c; sass src/styles.scss dist/index.css",
+    "build": "rollup -c; sass src/index.scss dist/index.css; sass src/block.scss dist/block.css",
     "minify": "terser --compress --mangle --module -- dist/cjs/index.js > dist/cjs/index.min.js",
     "format": "prettier --write src dev",
     "size-report": "vite-bundle-visualizer"
