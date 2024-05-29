@@ -29,8 +29,14 @@ yq eval ".version = \"$VERSION\"" package.json > package.json.tmp
 mv package.json.tmp package.json
 rm -f package.json.tmp
 
+# 3. Run pnpm scripts
+pnpm install
+pnpm run format
+pnpm run build
+
 # 3. Commit the changes
 git add package.json
+git add -f dist
 git commit -m "Release v$VERSION"
 
 # 4. Push the branch and tag
