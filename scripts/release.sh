@@ -21,7 +21,7 @@ fi
 
 # 1. Checkout to a new branch
 ORIGINAL_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-git checkout -b "v$VERSION"
+git checkout -b "release/$VERSION"
 
 # 2. Update version in package.json, using yq
 
@@ -34,7 +34,11 @@ git add package.json
 git commit -m "Release v$VERSION"
 
 # 4. Push the branch and tag
+git push origin "release/$VERSION"
+
+# 5. Tag the commit
+git tag -a "v$VERSION" -m "Release v$VERSION"
 git push origin "v$VERSION"
 
-# 5. Return to the original branch
+# 6. Return to the original branch
 git checkout "$ORIGINAL_BRANCH"
