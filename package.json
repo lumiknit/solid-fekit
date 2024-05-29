@@ -21,8 +21,8 @@
   ],
   "exports": {
     "solid": {
-      "development": "./dist/source/index.jsx",
-      "import": "./dist/source/index.jsx"
+      "development": "./dist/source/index.js",
+      "import": "./dist/source/index.js"
     },
     "development": {
       "import": {
