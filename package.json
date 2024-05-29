@@ -20,22 +20,16 @@
     "src"
   ],
   "exports": {
-    "solid": {
-      "development": "./dist/source/index.js",
-      "import": "./dist/source/index.js"
+    "./dist/*.css": {
+      "import": "./dist/*.css",
+      "require": "./dist/*.css"
     },
-    "development": {
-      "import": {
-        "types": "./dist/types/index.d.ts",
-        "default": "./dist/esm/index.js"
-      },
-      "require": "./dist/cjs/index.js"
-    },
-    "import": {
-      "types": "./dist/types/index.d.ts",
-      "default": "./dist/esm/index.js"
-    },
-    "require": "./dist/cjs/index.js"
+    ".": {
+      "default": "./dist/esm/index.js",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/types/index.d.ts"
+    }
   },
   "scripts": {
     "build": "rollup -c; sass src/index.scss dist/index.css; sass src/block.scss dist/block.css",
