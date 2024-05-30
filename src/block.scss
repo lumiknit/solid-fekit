@@ -12,6 +12,7 @@ $ui-border-radius: 0.25rem;
     background-color 0.1s ease-in-out,
     border-color 0.1s ease-in-out;
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 .btn-sm {

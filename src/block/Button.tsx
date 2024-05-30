@@ -4,7 +4,7 @@ type ComponentType = {
   ref?: Ref<HTMLButtonElement>;
   children: JSXElement;
   class?: string;
-  color: string;
+  color?: string;
   outline?: boolean;
   small?: boolean;
   disabled?: boolean;
@@ -32,8 +32,8 @@ const Button: Component<Props> = (props) => {
       {...elemProps()}
       ref={props.ref}
       class={`no-user-select btn btn-${props.outline ? 'ol-' : ''}${
-        props.color
-      } ${props.class ?? ''} ${props.small ? 'btn-sm' : ''}`}
+        props.color || 'secondary'
+      } ${props.small ? 'btn-sm' : ''} ${props.class ?? ''}`}
     >
       {props.children}
     </button>
