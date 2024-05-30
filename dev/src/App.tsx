@@ -11,6 +11,7 @@ import {
   RadioButtons,
   Spinner,
 } from '../../src/block';
+import { createSignal } from 'solid-js';
 
 const ModalComponent = (props: { close: () => void }) => {
   return (
@@ -23,6 +24,9 @@ const ModalComponent = (props: { close: () => void }) => {
 
 const App = () => {
   const state = createModalState();
+
+  const [v, setV] = createSignal<boolean>(false);
+
   return (
     <>
       <ModalContainer state={state} />
@@ -51,7 +55,10 @@ const App = () => {
 
       <Spinner color="primary" />
 
-      <Checkbox color="danger">askd</Checkbox>
+      <Checkbox color="danger" value={v()}>
+        askd
+      </Checkbox>
+      <Button onClick={() => setV(!v())}>toggle</Button>
 
       <RadioButtons
         initialValue="a"

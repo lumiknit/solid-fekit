@@ -1,4 +1,12 @@
-import { Component, JSX, Ref, Show, createSignal } from 'solid-js';
+import {
+  Component,
+  JSX,
+  Ref,
+  Show,
+  createEffect,
+  createSignal,
+  untrack,
+} from 'solid-js';
 
 type Props = {
   ref?: Ref<HTMLInputElement>;
@@ -16,6 +24,12 @@ const Checkbox: Component<Props> = (props) => {
     setChecked(target.checked);
     props.onChange?.(target.checked);
   };
+  createEffect(() => {
+    const c = untrack(checked);
+    if (props.value !== c) {
+      setChecked(props.value);
+    }
+  });
   return (
     <label class="checkbox">
       <div class="wh-1 checkbox-box no-user-select cursor-pointer">
