@@ -1,0 +1,523 @@
+/* Button */
+.btn {
+  font-size: 1rem;
+  border: 1px solid black;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out, border-color 0.1s ease-in-out;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.btn-sm {
+  font-size: 0.75rem;
+  padding: 0.25rem;
+  border-radius: 9999rem;
+}
+
+/* Dropdown */
+.dropdown {
+  display: inline-block;
+}
+
+.dropdown-menu {
+  position: absolute;
+  min-width: 10rem;
+  z-index: 10;
+  padding: 0.25rem;
+  background-color: rgba(var(--c-rgb-bg), 1);
+  border-radius: 0.25rem;
+}
+
+.dropdown-menu > a {
+  color: rgba(var(--c-rgb-fg), 1);
+  padding: 0.3rem 0.5rem;
+  text-decoration: none;
+  display: block;
+  border-radius: 0.25rem;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+}
+
+.dropdown-menu > a:hover {
+  background-color: rgba(var(--c-rgb-primary), 0.25);
+}
+
+.dropdown-menu > a:active {
+  background-color: rgba(var(--c-rgb-fg), 0.25);
+}
+
+.dropdown-menu > hr {
+  border-color: rgba(var(--c-rgb-fg), 0.125);
+  margin: 1px 0;
+}
+
+/* Input */
+.form-control {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  padding: 0.5rem;
+  color: rgb(var(--c-rgb-fg));
+  background-color: rgb(var(--c-rgb-bg-hard));
+}
+
+.code-area > textarea.form-control {
+  height: 1rem;
+}
+
+.code-area > textarea.form-control,
+.form-control[type=text],
+.form-control[type=password],
+.form-control[type=number] {
+  border: 1px solid rgba(var(--c-rgb-secondary), 0.5);
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+}
+
+.code-area > textarea.form-control:focus,
+.form-control[type=text]:focus,
+.form-control[type=password]:focus,
+.form-control[type=number]:focus {
+  outline: 0.125rem solid rgba(var(--c-rgb-primary), 0.5);
+}
+
+.code-area > textarea.form-control:read-only,
+input.form-control[type=text]:read-only {
+  color: rgba(var(--c-rgb-fg), 1);
+  background-color: rgba(var(--c-rgb-bg), 1);
+}
+
+.code-area {
+  display: flex;
+}
+
+.code-area > textarea {
+  font-family: monospace;
+  resize: both;
+  flex: 1;
+  tab-size: 2;
+}
+
+.code-area > textarea.code-area-hidden {
+  visibility: hidden;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 0.25rem;
+}
+
+.input-group > .form-control {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.input-group > .form-control:not(:last-child),
+.input-group > .btn:not(:last-child),
+.input-group > .dropdown:not(:last-child) > .btn {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.input-group > .form-control:not(:first-child),
+.input-group > .btn:not(:first-child),
+.input-group > .dropdown:not(:first-child) > .btn {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* Spinner */
+span.spinner {
+  border-width: 0.2em;
+  border-style: solid;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: b-rotation 0.5s linear infinite;
+}
+
+@keyframes b-rotation {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(1turn);
+  }
+}
+/* Checkbox */
+.checkbox input {
+  display: none;
+}
+
+.checkbox-box {
+  content: "";
+  display: inline-block;
+  color: rgba(var(--c-rgb-primary), 1);
+  border: 0.125em solid rgba(var(--c-rgb-secondary), 0.5);
+  border-radius: 0.25em;
+  vertical-align: text-bottom;
+  text-align: center;
+  padding: 0;
+}
+.checkbox-box:hover {
+  outline: 0.175rem solid rgba(var(--c-rgb-primary), 0.25);
+}
+.checkbox-box > svg {
+  fill: transparent;
+}
+
+.bg-fg {
+  background-color: rgb(var(---rgb-fg));
+}
+
+.fg-fg {
+  color: rgb(var(--c-rgb-fg));
+}
+
+.border-fg {
+  border-color: rgb(var(--c-rgb-fg));
+}
+
+.stroke-fg {
+  stroke: rgb(var(--c-rgb-fg));
+}
+
+/* Buttons */
+.btn-fg {
+  color: rgba(var(--c-rgb-fg-text), 1);
+  background-color: rgba(var(--c-rgb-fg), 1);
+  border-color: rgba(var(--c-rgb-fg), 1);
+}
+
+.btn-ol-fg {
+  color: rgba(var(--c-rgb-fg), 1);
+  background-color: transparent;
+  border-color: rgba(var(--c-rgb-fg), 1);
+}
+
+.btn.btn-fg:not(:disabled):hover,
+.btn.btn-ol-fg:not(:disabled):hover {
+  color: rgba(var(--c-rgb-fg-text), 1);
+  background-color: rgba(var(--c-rgb-fg-light), 1);
+  border-color: rgba(var(--c-rgb-fg-light), 1);
+}
+
+.btn.btn-fg:not(:disabled):active,
+.btn.btn-ol-fg:not(:disabled):active {
+  color: rgba(var(--c-rgb-fg-text), 1);
+  background-color: rgba(var(--c-rgb-fg-dark), 1);
+  border-color: rgba(var(--c-rgb-fg-dark), 1);
+}
+
+.bg-bg {
+  background-color: rgb(var(---rgb-bg));
+}
+
+.fg-bg {
+  color: rgb(var(--c-rgb-bg));
+}
+
+.border-bg {
+  border-color: rgb(var(--c-rgb-bg));
+}
+
+.stroke-bg {
+  stroke: rgb(var(--c-rgb-bg));
+}
+
+/* Buttons */
+.btn-bg {
+  color: rgba(var(--c-rgb-bg-text), 1);
+  background-color: rgba(var(--c-rgb-bg), 1);
+  border-color: rgba(var(--c-rgb-bg), 1);
+}
+
+.btn-ol-bg {
+  color: rgba(var(--c-rgb-bg), 1);
+  background-color: transparent;
+  border-color: rgba(var(--c-rgb-bg), 1);
+}
+
+.btn.btn-bg:not(:disabled):hover,
+.btn.btn-ol-bg:not(:disabled):hover {
+  color: rgba(var(--c-rgb-bg-text), 1);
+  background-color: rgba(var(--c-rgb-bg-light), 1);
+  border-color: rgba(var(--c-rgb-bg-light), 1);
+}
+
+.btn.btn-bg:not(:disabled):active,
+.btn.btn-ol-bg:not(:disabled):active {
+  color: rgba(var(--c-rgb-bg-text), 1);
+  background-color: rgba(var(--c-rgb-bg-dark), 1);
+  border-color: rgba(var(--c-rgb-bg-dark), 1);
+}
+
+.bg-primary {
+  background-color: rgb(var(---rgb-primary));
+}
+
+.fg-primary {
+  color: rgb(var(--c-rgb-primary));
+}
+
+.border-primary {
+  border-color: rgb(var(--c-rgb-primary));
+}
+
+.stroke-primary {
+  stroke: rgb(var(--c-rgb-primary));
+}
+
+/* Buttons */
+.btn-primary {
+  color: rgba(var(--c-rgb-primary-text), 1);
+  background-color: rgba(var(--c-rgb-primary), 1);
+  border-color: rgba(var(--c-rgb-primary), 1);
+}
+
+.btn-ol-primary {
+  color: rgba(var(--c-rgb-primary), 1);
+  background-color: transparent;
+  border-color: rgba(var(--c-rgb-primary), 1);
+}
+
+.btn.btn-primary:not(:disabled):hover,
+.btn.btn-ol-primary:not(:disabled):hover {
+  color: rgba(var(--c-rgb-primary-text), 1);
+  background-color: rgba(var(--c-rgb-primary-light), 1);
+  border-color: rgba(var(--c-rgb-primary-light), 1);
+}
+
+.btn.btn-primary:not(:disabled):active,
+.btn.btn-ol-primary:not(:disabled):active {
+  color: rgba(var(--c-rgb-primary-text), 1);
+  background-color: rgba(var(--c-rgb-primary-dark), 1);
+  border-color: rgba(var(--c-rgb-primary-dark), 1);
+}
+
+.bg-secondary {
+  background-color: rgb(var(---rgb-secondary));
+}
+
+.fg-secondary {
+  color: rgb(var(--c-rgb-secondary));
+}
+
+.border-secondary {
+  border-color: rgb(var(--c-rgb-secondary));
+}
+
+.stroke-secondary {
+  stroke: rgb(var(--c-rgb-secondary));
+}
+
+/* Buttons */
+.btn-secondary {
+  color: rgba(var(--c-rgb-secondary-text), 1);
+  background-color: rgba(var(--c-rgb-secondary), 1);
+  border-color: rgba(var(--c-rgb-secondary), 1);
+}
+
+.btn-ol-secondary {
+  color: rgba(var(--c-rgb-secondary), 1);
+  background-color: transparent;
+  border-color: rgba(var(--c-rgb-secondary), 1);
+}
+
+.btn.btn-secondary:not(:disabled):hover,
+.btn.btn-ol-secondary:not(:disabled):hover {
+  color: rgba(var(--c-rgb-secondary-text), 1);
+  background-color: rgba(var(--c-rgb-secondary-light), 1);
+  border-color: rgba(var(--c-rgb-secondary-light), 1);
+}
+
+.btn.btn-secondary:not(:disabled):active,
+.btn.btn-ol-secondary:not(:disabled):active {
+  color: rgba(var(--c-rgb-secondary-text), 1);
+  background-color: rgba(var(--c-rgb-secondary-dark), 1);
+  border-color: rgba(var(--c-rgb-secondary-dark), 1);
+}
+
+.bg-success {
+  background-color: rgb(var(---rgb-success));
+}
+
+.fg-success {
+  color: rgb(var(--c-rgb-success));
+}
+
+.border-success {
+  border-color: rgb(var(--c-rgb-success));
+}
+
+.stroke-success {
+  stroke: rgb(var(--c-rgb-success));
+}
+
+/* Buttons */
+.btn-success {
+  color: rgba(var(--c-rgb-success-text), 1);
+  background-color: rgba(var(--c-rgb-success), 1);
+  border-color: rgba(var(--c-rgb-success), 1);
+}
+
+.btn-ol-success {
+  color: rgba(var(--c-rgb-success), 1);
+  background-color: transparent;
+  border-color: rgba(var(--c-rgb-success), 1);
+}
+
+.btn.btn-success:not(:disabled):hover,
+.btn.btn-ol-success:not(:disabled):hover {
+  color: rgba(var(--c-rgb-success-text), 1);
+  background-color: rgba(var(--c-rgb-success-light), 1);
+  border-color: rgba(var(--c-rgb-success-light), 1);
+}
+
+.btn.btn-success:not(:disabled):active,
+.btn.btn-ol-success:not(:disabled):active {
+  color: rgba(var(--c-rgb-success-text), 1);
+  background-color: rgba(var(--c-rgb-success-dark), 1);
+  border-color: rgba(var(--c-rgb-success-dark), 1);
+}
+
+.bg-danger {
+  background-color: rgb(var(---rgb-danger));
+}
+
+.fg-danger {
+  color: rgb(var(--c-rgb-danger));
+}
+
+.border-danger {
+  border-color: rgb(var(--c-rgb-danger));
+}
+
+.stroke-danger {
+  stroke: rgb(var(--c-rgb-danger));
+}
+
+/* Buttons */
+.btn-danger {
+  color: rgba(var(--c-rgb-danger-text), 1);
+  background-color: rgba(var(--c-rgb-danger), 1);
+  border-color: rgba(var(--c-rgb-danger), 1);
+}
+
+.btn-ol-danger {
+  color: rgba(var(--c-rgb-danger), 1);
+  background-color: transparent;
+  border-color: rgba(var(--c-rgb-danger), 1);
+}
+
+.btn.btn-danger:not(:disabled):hover,
+.btn.btn-ol-danger:not(:disabled):hover {
+  color: rgba(var(--c-rgb-danger-text), 1);
+  background-color: rgba(var(--c-rgb-danger-light), 1);
+  border-color: rgba(var(--c-rgb-danger-light), 1);
+}
+
+.btn.btn-danger:not(:disabled):active,
+.btn.btn-ol-danger:not(:disabled):active {
+  color: rgba(var(--c-rgb-danger-text), 1);
+  background-color: rgba(var(--c-rgb-danger-dark), 1);
+  border-color: rgba(var(--c-rgb-danger-dark), 1);
+}
+
+.bg-warning {
+  background-color: rgb(var(---rgb-warning));
+}
+
+.fg-warning {
+  color: rgb(var(--c-rgb-warning));
+}
+
+.border-warning {
+  border-color: rgb(var(--c-rgb-warning));
+}
+
+.stroke-warning {
+  stroke: rgb(var(--c-rgb-warning));
+}
+
+/* Buttons */
+.btn-warning {
+  color: rgba(var(--c-rgb-warning-text), 1);
+  background-color: rgba(var(--c-rgb-warning), 1);
+  border-color: rgba(var(--c-rgb-warning), 1);
+}
+
+.btn-ol-warning {
+  color: rgba(var(--c-rgb-warning), 1);
+  background-color: transparent;
+  border-color: rgba(var(--c-rgb-warning), 1);
+}
+
+.btn.btn-warning:not(:disabled):hover,
+.btn.btn-ol-warning:not(:disabled):hover {
+  color: rgba(var(--c-rgb-warning-text), 1);
+  background-color: rgba(var(--c-rgb-warning-light), 1);
+  border-color: rgba(var(--c-rgb-warning-light), 1);
+}
+
+.btn.btn-warning:not(:disabled):active,
+.btn.btn-ol-warning:not(:disabled):active {
+  color: rgba(var(--c-rgb-warning-text), 1);
+  background-color: rgba(var(--c-rgb-warning-dark), 1);
+  border-color: rgba(var(--c-rgb-warning-dark), 1);
+}
+
+.bg-info {
+  background-color: rgb(var(---rgb-info));
+}
+
+.fg-info {
+  color: rgb(var(--c-rgb-info));
+}
+
+.border-info {
+  border-color: rgb(var(--c-rgb-info));
+}
+
+.stroke-info {
+  stroke: rgb(var(--c-rgb-info));
+}
+
+/* Buttons */
+.btn-info {
+  color: rgba(var(--c-rgb-info-text), 1);
+  background-color: rgba(var(--c-rgb-info), 1);
+  border-color: rgba(var(--c-rgb-info), 1);
+}
+
+.btn-ol-info {
+  color: rgba(var(--c-rgb-info), 1);
+  background-color: transparent;
+  border-color: rgba(var(--c-rgb-info), 1);
+}
+
+.btn.btn-info:not(:disabled):hover,
+.btn.btn-ol-info:not(:disabled):hover {
+  color: rgba(var(--c-rgb-info-text), 1);
+  background-color: rgba(var(--c-rgb-info-light), 1);
+  border-color: rgba(var(--c-rgb-info-light), 1);
+}
+
+.btn.btn-info:not(:disabled):active,
+.btn.btn-ol-info:not(:disabled):active {
+  color: rgba(var(--c-rgb-info-text), 1);
+  background-color: rgba(var(--c-rgb-info-dark), 1);
+  border-color: rgba(var(--c-rgb-info-dark), 1);
+}
+
+/*# sourceMappingURL=block.css.map */
