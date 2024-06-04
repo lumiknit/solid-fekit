@@ -1,0 +1,102 @@
+// path.ts: Path utilities
+
+/**
+ * Path segments. By join with the PATH_SEPARATOR, it'll create a path string.
+ * If the first element is empty, it's an absolute path.
+ */
+export type PathSegments = string[];
+
+/**
+ * Path separator.
+ */
+export const PATH_SEPARATOR = '/';
+
+/**
+ * Current segments.
+ */
+export const CURRENT_SEGMENTS = new Set(['.', '']);
+
+/**
+ * Parse a path and return segments in canonical form.
+ *
+ * @param path Path string
+ * @param base Base path segments. If it provided, it works as cd in shell.
+ */
+export const parsePath = (path: string, base?: PathSegments): PathSegments => {
+  const splitted = (base || []).concat(path.split(PATH_SEPARATOR));
+  const isRoot = splitted[0] === '';
+  if (splitted.length <= 1) return ['.'];
+  const segments = splitted.filter((s) => !CURRENT_SEGMENTS.has(s));
+  // Find root
+  for (let p = 0; p < segments.length; p++) {
+    if (segments[p] === '..') {
+      segments.splice(p - 1, 2);
+      p -= 2;
+    }
+  }
+  if (isRoot) segments.unshift('');
+  return segments;
+};
+
+/**
+ * Join path segments into a single path string.
+ */
+export const joinPath = (segments: PathSegments): string =>
+  segments.join(PATH_SEPARATOR);
+
+/**
+ * Check if the path is absolute.
+ *
+ * @param segments Path segments
+ * @returns True if the path is absolute
+ */
+export const isAbsolute = (segments: PathSegments): boolean =>
+  segments[0] === '';
+
+/**
+ * Extract filename from the path.
+ */
+export const extractFilename = (path: string): string => {
+  const segments = parsePath(path);
+  return segments[segments.length - 1];
+};
+
+/**
+ * Extract extension from the path.
+ */
+export const extractFileExtension = (path: string): string => {
+  const filename = extractFilename(path);
+  const li = filename.lastIndexOf('.');
+  if (li === -1) return '';
+  return filename.slice(li + 1);
+};
+
+/**
+ * Extract directory from the path.
+ */
+export const extractDirectory = (path: string): string => {
+  const segments = parsePath(path);
+  return joinPath(segments.slice(0, -1));
+};
+
+/**
+ * Increase an index in the filename.
+ */
+export const incIndexToFilename = (path: string): string => {
+  const seg = parsePath(path);
+  const filename = extractFilename(path);
+
+  // Split by extension
+  let li = filename.lastIndexOf('.');
+  if (li < 0) li = filename.length;
+  const name = filename.slice(0, li);
+  const ext = filename.slice(li);
+
+  // Find digits in the name part
+  const match = name.match(/([0-9]+)([^0-9]*)$/);
+  if (!match) return path;
+  const num = parseInt(match[1]) + 1;
+  const newName = name.slice(0, match.index) + num + match[2] + ext;
+  seg[seg.length - 1] = newName;
+  return joinPath(seg);
+};

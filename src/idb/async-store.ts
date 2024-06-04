@@ -24,9 +24,9 @@ export class AsyncIDBStore {
     });
   }
 
-	async add(value: any, key?: IDBValidKey): Promise<IDBValidKey> {
-		return this.wrap((store) => store.add(value, key));
-	}
+  async add(value: any, key?: IDBValidKey): Promise<IDBValidKey> {
+    return this.wrap((store) => store.add(value, key));
+  }
 
   async get(key: IDBValidKey) {
     return this.wrap((store) => store.get(key));
@@ -36,15 +36,15 @@ export class AsyncIDBStore {
     return this.wrap((store) => store.getAll());
   }
 
-	async getAllKeys() {
-		return this.wrap((store) => store.getAllKeys());
-	}
+  async getAllKeys() {
+    return this.wrap((store) => store.getAllKeys());
+  }
 
-	async getKey(key: IDBValidKey) {
-		return this.wrap((store) => store.getKey(key));
-	}
+  async getKey(key: IDBValidKey) {
+    return this.wrap((store) => store.getKey(key));
+  }
 
-	async clear() {
+  async clear() {
     return this.wrap((store) => store.clear());
   }
 
@@ -56,23 +56,23 @@ export class AsyncIDBStore {
     return this.wrap((store) => store.delete(key));
   }
 
-	async put(value: any, key?: IDBValidKey) {
+  async put(value: any, key?: IDBValidKey) {
     return this.wrap((store) => store.put(value, key));
   }
 
-	async openCursor(
-		range?: IDBKeyRange | IDBValidKey | null,
-		direction?: IDBCursorDirection
-	) {
-		return this.wrap((store) => store.openCursor(range, direction));
-	}
+  async openCursor(
+    range?: IDBKeyRange | IDBValidKey | null,
+    direction?: IDBCursorDirection
+  ) {
+    return this.wrap((store) => store.openCursor(range, direction));
+  }
 
-	async openKeyCursor(
-		range?: IDBKeyRange | IDBValidKey | null,
-		direction?: IDBCursorDirection
-	) {
-		return this.wrap((store) => store.openKeyCursor(range, direction));
-	}
+  async openKeyCursor(
+    range?: IDBKeyRange | IDBValidKey | null,
+    direction?: IDBCursorDirection
+  ) {
+    return this.wrap((store) => store.openKeyCursor(range, direction));
+  }
 
   index(name: string) {
     return this.store.index(name);
@@ -131,19 +131,18 @@ export const openStore = (
   db: IDBDatabase,
   storeNames: string[],
   mode: IDBTransactionMode = 'readonly',
-	onComplete?: (this: IDBTransaction, ev: Event) => any,
+  onComplete?: (this: IDBTransaction, ev: Event) => any
 ) =>
   new Promise<IDBObjectStore[]>((resolve, reject) => {
     const tx = db.transaction(storeNames, mode);
-		if (onComplete)
-			tx.oncomplete = onComplete;
+    if (onComplete) tx.oncomplete = onComplete;
     tx.onerror = () => reject(tx.error);
 
     const stores: IDBObjectStore[] = [];
     for (const name of storeNames) {
       stores.push(tx.objectStore(name));
     }
-		resolve(stores);
+    resolve(stores);
   });
 
 /**
@@ -153,14 +152,17 @@ export const openStore = (
 export const openIDBStore = async (
   dbName: string,
   storeNames: string[],
-	options: {
-		handleUpgrade?: (db: IDBDatabase, ev: IDBVersionChangeEvent) => Promise<void>,
-		mode?: IDBTransactionMode,
-		onComplete?: (this: IDBTransaction, ev: Event) => any,
-	} = {},
+  options: {
+    handleUpgrade?: (
+      db: IDBDatabase,
+      ev: IDBVersionChangeEvent
+    ) => Promise<void>;
+    mode?: IDBTransactionMode;
+    onComplete?: (this: IDBTransaction, ev: Event) => any;
+  } = {}
 ) => {
   const db = await openIDB(dbName, options.handleUpgrade);
-	const mode = options.mode || 'readonly';
+  const mode = options.mode || 'readonly';
   const store = await openStore(db, storeNames, mode, options.onComplete);
   return store.map((store) => new AsyncIDBStore(db, store, mode));
 };
