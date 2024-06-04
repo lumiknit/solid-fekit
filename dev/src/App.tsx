@@ -3,7 +3,7 @@ import '../../src/block.scss';
 
 import './App.css';
 
-import { ModalContainer, createModalState, openModal } from '../../src/modal';
+import { ModalContainer, openModal } from '../../src/modal';
 import {
   Button,
   Checkbox,
@@ -23,18 +23,13 @@ const ModalComponent = (props: { close: () => void }) => {
 };
 
 const App = () => {
-  const state = createModalState();
-
   const [v, setV] = createSignal<boolean>(false);
 
   return (
     <>
-      <ModalContainer state={state} />
+      <ModalContainer />
 
-      <Button
-        onClick={() => openModal(state, ModalComponent, {})}
-        color="primary"
-      >
+      <Button onClick={() => openModal(ModalComponent, {})} color="primary">
         open modal
       </Button>
 

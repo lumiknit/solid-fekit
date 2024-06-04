@@ -1,2 +1,4 @@
+export * from './types';
+
 export { default as ModalContainer } from './ModalContainer';
-export * from './state';
+export { openModal, closeModal } from './store';
