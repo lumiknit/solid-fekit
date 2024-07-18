@@ -1,19 +1,26 @@
 /**
+ * Wrapper for IndexedDB Transaction that provides a promise-based API
+ */
+export class AsyncIDBTransaction {
+  transaction: IDBTransaction;
+
+  constructor(transaction: IDBTransaction) {
+    this.transaction = transaction;
+  }
+
+  getStore(storeName: string) {
+    return new AsyncIDBStore(this.transaction.objectStore(storeName));
+  }
+}
+
+/**
  * A wrapper for IndexedDB Store that provides a promise-based API
  */
 export class AsyncIDBStore {
-  readonly db: IDBDatabase;
   readonly store: IDBObjectStore;
-  readonly mode: IDBTransactionMode;
 
-  constructor(
-    db: IDBDatabase,
-    store: IDBObjectStore,
-    mode: IDBTransactionMode
-  ) {
-    this.db = db;
+  constructor(store: IDBObjectStore) {
     this.store = store;
-    this.mode = mode;
   }
 
   async wrap<T>(fn: (store: IDBObjectStore) => IDBRequest<T>): Promise<T> {
@@ -92,77 +99,55 @@ export class AsyncIDBStore {
 }
 
 /**
- * Open an IndexedDB database
- * If the database does not exist, it will be created with the handler
- *
- * @param dbName The name of the database
- * @param handleUpgrade The handler for the upgrade event
- * @returns A promise that resolves to the database
+ * Open IDBDatabase asynchronously.
+ * @param dbName Name of the database.
+ * @param onUpgradeNeeded Callback function to be called when the database is being upgraded.
+ * @returns Promise that resolves to the opened IDBDatabase.
  */
-export const openIDB = (
+export const openIDBDatabase = async (
   dbName: string,
-  handleUpgrade?: (db: IDBDatabase, ev: IDBVersionChangeEvent) => Promise<void>
+  onUpgradeNeeded: (db: IDBDatabase, event: IDBVersionChangeEvent) => void
 ) =>
   new Promise<IDBDatabase>((resolve, reject) => {
-    const req = window.indexedDB.open(dbName);
+    let req = indexedDB.open(dbName);
     req.onsuccess = () => resolve(req.result);
     req.onerror = () => reject(req.error);
-    req.onupgradeneeded = (event) => {
-      const db = req.result;
-      if (handleUpgrade) {
-        handleUpgrade(db, event)
-          .then(() => resolve(db))
-          .catch(reject);
-      } else {
-        reject(new Error('Upgrade needed, but no handler provided'));
-      }
+    req.onupgradeneeded = (e) => {
+      onUpgradeNeeded((e.target as any).result, e);
     };
   });
 
 /**
- * Open an IndexedDB object store from a database
- *
- * @param db The database
- * @param storeNames The names of the object stores to open
- * @param mode The mode of the transaction
- * @returns The array of object stores
+ * Create an IDBTransaction asynchronously.
+ * @param db IDBDatabase to create the transaction on.
+ * @param storeNames Name of the object store or an iterable of object store names.
+ * @param mode Transaction mode.
+ * @param options Transaction options.
+ * @returns An AsyncIDBTransaction object.
  */
-export const openStore = (
+export const createAsyncIDBTransaction = (
   db: IDBDatabase,
-  storeNames: string[],
-  mode: IDBTransactionMode = 'readonly',
-  onComplete?: (this: IDBTransaction, ev: Event) => any
-) =>
-  new Promise<IDBObjectStore[]>((resolve, reject) => {
-    const tx = db.transaction(storeNames, mode);
-    if (onComplete) tx.oncomplete = onComplete;
-    tx.onerror = () => reject(tx.error);
-
-    const stores: IDBObjectStore[] = [];
-    for (const name of storeNames) {
-      stores.push(tx.objectStore(name));
-    }
-    resolve(stores);
-  });
+  storeNames: string | string[],
+  mode?: IDBTransactionMode,
+  options?: IDBTransactionOptions
+): AsyncIDBTransaction =>
+  new AsyncIDBTransaction(db.transaction(storeNames, mode, options));
 
 /**
- * Open an IndexedDB database and object store
- * If the database does not exist, it will be created with the handler
+ * Helper function to open IDB Stores.
+ * If the store does not exist, it will be created empty one.
  */
-export const openIDBStore = async (
+export const openIDBStores = async (
   dbName: string,
   storeNames: string[],
-  options: {
-    handleUpgrade?: (
-      db: IDBDatabase,
-      ev: IDBVersionChangeEvent
-    ) => Promise<void>;
-    mode?: IDBTransactionMode;
-    onComplete?: (this: IDBTransaction, ev: Event) => any;
-  } = {}
+  mode?: IDBTransactionMode,
+  options?: IDBTransactionOptions
 ) => {
-  const db = await openIDB(dbName, options.handleUpgrade);
-  const mode = options.mode || 'readonly';
-  const store = await openStore(db, storeNames, mode, options.onComplete);
-  return store.map((store) => new AsyncIDBStore(db, store, mode));
+  const db = await openIDBDatabase(dbName, (db) => {
+    for (const storeName of storeNames) {
+      db.createObjectStore(storeName);
+    }
+  });
+  const tr = createAsyncIDBTransaction(db, storeNames, mode, options);
+  return storeNames.map((storeName) => tr.getStore(storeName));
 };
